@@ -1,0 +1,164 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="description" content="CareerSpire – browse, search and filter job openings and view full job details.">
+  <title>CareerSpire | Job Portal</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+  <header class="site-header">
+    <div class="container header-row">
+      <a href="#top" class="brand" aria-label="CareerSpire home">
+        <span class="brand-mark" aria-hidden="true">C</span>
+        <span>CareerSpire</span>
+      </a>
+      <nav class="nav" aria-label="Main">
+        <a href="#jobs">Browse jobs</a>
+        <a href="#how">How it works</a>
+        <button type="button" class="nav-saved" id="navSaved">
+          Saved jobs <span class="count" id="savedCount">0</span>
+        </button>
+      </nav>
+    </div>
+  </header>
+
+  <main id="top">
+    <section class="hero">
+      <div class="container hero-inner">
+        <div class="hero-copy">
+          <h1>Find the job that fits your skills and your life.</h1>
+          <p class="hero-sub">Search openings from growing companies, compare salaries, and apply in a minute.</p>
+
+          <form class="search-bar" id="searchForm" role="search">
+            <div class="field">
+              <label for="keyword">Job title, skill or company</label>
+              <input type="search" id="keyword" placeholder="e.g. React, Data Analyst" autocomplete="off">
+            </div>
+            <div class="field">
+              <label for="location">Location</label>
+              <select id="location"><option value="">All locations</option></select>
+            </div>
+            <button type="submit" class="btn btn-accent">Search jobs</button>
+          </form>
+
+          <div class="quick" aria-label="Quick searches">
+            <span>Popular:</span>
+            <button type="button" class="chip" data-quick="React">React</button>
+            <button type="button" class="chip" data-quick="SQL">SQL</button>
+            <button type="button" class="chip" data-quick="Design">Design</button>
+            <button type="button" class="chip" data-quick="Intern">Internships</button>
+          </div>
+        </div>
+
+        <ul class="stats" aria-label="Portal statistics">
+          <li><strong id="statJobs">0</strong><span>Open positions</span></li>
+          <li><strong id="statCompanies">0</strong><span>Hiring companies</span></li>
+          <li><strong id="statRemote">0</strong><span>Remote roles</span></li>
+        </ul>
+      </div>
+    </section>
+
+    <section class="listing container" id="jobs">
+      <div class="overlay" id="overlay"></div>
+
+      <aside class="filters" id="filters" aria-label="Job filters">
+        <div class="filters-head">
+          <h2>Filters</h2>
+          <button type="button" class="link-btn" id="clearBtn">Clear all</button>
+          <button type="button" class="icon-btn close-filters" id="closeFilters" aria-label="Close filters">&times;</button>
+        </div>
+
+        <fieldset>
+          <legend>Job type</legend>
+          <div id="typeFilters" class="checks"></div>
+        </fieldset>
+
+        <fieldset>
+          <legend>Experience level</legend>
+          <div id="levelFilters" class="checks"></div>
+        </fieldset>
+
+        <div class="group">
+          <label for="category">Category</label>
+          <select id="category"><option value="">All categories</option></select>
+        </div>
+
+        <div class="group">
+          <label for="salary">Minimum salary: <strong id="salaryOut">Any</strong></label>
+          <input type="range" id="salary" min="0" max="30" step="2" value="0">
+          <div class="range-scale"><span>Any</span><span>₹30 LPA</span></div>
+        </div>
+
+        <label class="switch">
+          <input type="checkbox" id="remoteOnly">
+          <span class="track" aria-hidden="true"></span>
+          <span>Remote jobs only</span>
+        </label>
+
+        <button type="button" class="btn btn-primary full show-mobile" id="applyFilters">Show results</button>
+      </aside>
+
+      <div class="results">
+        <div class="toolbar">
+          <p class="result-count" id="resultCount" aria-live="polite"></p>
+          <div class="toolbar-actions">
+            <button type="button" class="btn btn-outline show-mobile" id="openFilters">Filters</button>
+            <button type="button" class="btn btn-outline" id="savedToggle" aria-pressed="false">Saved only</button>
+            <div class="sort">
+              <label for="sort">Sort by</label>
+              <select id="sort">
+                <option value="newest">Newest first</option>
+                <option value="salary">Highest salary</option>
+                <option value="title">Title A–Z</option>
+              </select>
+            </div>
+          </div>
+        </div>
+
+        <div id="jobList" class="job-list"></div>
+
+        <div class="empty" id="emptyState" hidden>
+          <h3>No jobs match your search</h3>
+          <p>Try a different keyword, lower the minimum salary, or clear your filters.</p>
+          <button type="button" class="btn btn-primary" id="emptyClear">Clear all filters</button>
+        </div>
+
+        <div class="more-wrap">
+          <button type="button" class="btn btn-outline" id="loadMore" hidden>Load more jobs</button>
+        </div>
+      </div>
+    </section>
+
+    <section class="how" id="how">
+      <div class="container">
+        <h2>How it works</h2>
+        <ol class="steps">
+          <li><h3>Search</h3><p>Enter a skill, title or company and pick a location.</p></li>
+          <li><h3>Compare</h3><p>Filter by job type, level, category and salary to narrow the list.</p></li>
+          <li><h3>Apply</h3><p>Open a listing, read the details and send your application.</p></li>
+        </ol>
+      </div>
+    </section>
+  </main>
+
+  <footer class="site-footer">
+    <div class="container">
+      <p>&copy; 2026 CareerSpire. Built for SpireX Foundation – Task 15: Job Portal UI.</p>
+    </div>
+  </footer>
+
+  <dialog id="jobDialog" aria-labelledby="dlgTitle">
+    <div id="dialogBody"></div>
+  </dialog>
+
+  <div class="toast" id="toast" role="status" aria-live="polite"></div>
+
+  <script src="script.js"></script>
+</body>
+</html>
